@@ -5,4 +5,7 @@ project(inputTerminal LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(inputTerminal main.cpp)
+add_executable(inputTerminal
+    splitter.h
+    splitter.cpp
+    main.cpp)
