@@ -41,24 +41,6 @@ public:
      */
     int sendMessage();
 
-//    /**
-//     * @brief configureCanBus. Configure can bus parameters.
-//     * @return "0" if it worked, "-1" if it failed.
-//     */
-//    int configureCanBus();
-
-//    /**
-//     * @brief configureDataSending. Creating the socket CAN BUS configuration.
-//     * @return "-1" if failed. "0" if it worked.
-//     */
-//    int configureDataSending();
-
-//    /**
-//     * @brief bindingSocketCan. Socket CAN BUS need a bind with address specification.
-//     * @return "0" if it worked. "-2" if it failed.
-//     */
-//    int bindingSocketCan();
-
     /**
      * @brief fillDataFrame. Fill "_frame" attribute that contains data to send to CAN BUS.
      */

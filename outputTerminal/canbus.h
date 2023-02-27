@@ -24,6 +24,8 @@ public:
      */
     int configureCanBus();
 
+protected:
+
     /**
      * @brief configureData. Creating the socket CAN BUS configuration.
      * @return "-1" if failed. "0" if it worked.
@@ -36,8 +38,6 @@ public:
      */
     int bindingSocketCan();
 
-
-protected:
     /**
      * @brief _conectionResult, result of the connection to CAN BUS.
      */

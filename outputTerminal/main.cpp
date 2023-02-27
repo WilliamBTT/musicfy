@@ -27,6 +27,7 @@ void signalHandler(int signum) {
 void runCanBusReceiver(bool &runningCanBus)
 {
     DataReader dataReader;
+    dataReader.configureCanBus();
     dataReader.readingCanBusLoop(runningCanBus);
     while(runningCanBus){
         std::cout << "Can Bus Running" << std::endl;
