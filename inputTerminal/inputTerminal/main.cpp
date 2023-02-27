@@ -7,6 +7,7 @@
 #include "datasender.h"
 #include <iostream>
 #include <vector>
+
 //using namespace std;
 
 int main(void) {
@@ -18,7 +19,8 @@ int main(void) {
     std::vector<int> messageVectorInt;
     DataSender dataSender;
 
-    if (dataSender.configureCanBus() != 0){
+    if (dataSender.configureCanBus() != 0)
+    {
         std::cout << "Can Bus configuration failed." <<std::endl;
         return 1;
     }

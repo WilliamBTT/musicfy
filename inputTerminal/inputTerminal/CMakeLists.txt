@@ -12,4 +12,9 @@ add_executable(inputTerminal
     splitter.cpp
     messageencoder.h
     messageencoder.cpp
-    main.cpp)
+    main.cpp
+    ../../outputTerminal/canbus.h
+    ../../outputTerminal/canbus.cpp
+    )
+
+
