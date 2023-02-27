@@ -4,6 +4,8 @@
 #include <chrono>
 #include <mutex>
 
+#include "datareader.h"
+
 // Mutex for protecting global variable.
 std::mutex mutexMode;
 // Global variable. Mode = 0 -> CAN BUS listening. Mode = 1 -> CRUD.
@@ -24,6 +26,8 @@ void signalHandler(int signum) {
 
 void runCanBusReceiver(bool &runningCanBus)
 {
+    DataReader dataReader;
+    dataReader.readingCanBusLoop(runningCanBus);
     while(runningCanBus){
         std::cout << "Can Bus Running" << std::endl;
         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
@@ -44,8 +48,7 @@ int main()
     while (runningLoop)
     {
         // Setting time to sleep loop.
-        std::chrono::milliseconds timeout(2000);
-        std::this_thread::sleep_for(timeout);
+        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 
         // Protect global variable with Mutex.
         mutexMode.lock();
@@ -66,7 +69,8 @@ int main()
                 runningCanBus = false;
                 if (canbusThread.joinable())
                 {
-                    canbusThread.join();  // If canbus thread is active, wait until it stops.
+//                    canbusThread.join();  // If canbus thread is active, wait until it stops.
+                    canbusThread.detach();
                 }
             }
 
