@@ -56,10 +56,12 @@ int DataSender::bindingSocketCan()
 {
     strcpy(_ifr.ifr_name, _ifname);
     ioctl(_connectionInformation, SIOCGIFINDEX, &_ifr);
+
+    // Setting address socket.
     _addr.can_family  = AF_CAN;
     _addr.can_ifindex = _ifr.ifr_ifindex;
-//    printf("%s at index %d\n", _ifname, _ifr.ifr_ifindex);
-    //
+
+    // Linking socket to vcan.
     if (bind(_connectionInformation, (struct sockaddr *)&_addr, sizeof(_addr)) == -1) {
         perror("Error in socket bind");
         return -2;
