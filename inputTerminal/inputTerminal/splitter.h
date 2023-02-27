@@ -4,6 +4,10 @@
 #include <iostream>
 #include <vector>
 
+/**
+ * @brief The Splitter class splits input string into a vector of pairs:
+ * [note, duration].
+ */
 class Splitter
 {
 public:
