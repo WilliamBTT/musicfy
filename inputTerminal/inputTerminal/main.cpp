@@ -4,26 +4,45 @@
 
 #include "splitter.h"
 #include "messageencoder.h"
-
-using namespace std;
+#include "datasender.h"
+#include <iostream>
+#include <vector>
+//using namespace std;
 
 int main(void) {
     int line=3, t;
-    string s = "";
+    std::string inputLine = "";
     Splitter split;
     std::vector<std::pair<std::string, int>> notesSplit;
     MessageEncoder messageEncoder;
     std::vector<int> messageVectorInt;
+    DataSender dataSender;
 
-    while (s != ":q")
-    {
-        cout << "Input message: (':q' for quit): " << endl;
-        getline(cin,s); // This is to input the sentence
-        cout << s << "  " << endl;
-//        s = "DO-FA-------SOL-LA-RE----";
-        notesSplit = split.split(s, '-');
-        messageEncoder.initEncoding(notesSplit);
-        messageVectorInt = messageEncoder.getMessageVectorInt();
+    if (dataSender.configureCanBus() != 0){
+        std::cout << "Can Bus configuration failed." <<std::endl;
+        return 1;
     }
-    cout << "Ending program..." << endl;
+
+    while (inputLine != ":q")
+    {
+        std::cout << "Input message: (':q' for quit): " << std::endl;
+        // Getting input message.
+        getline(std::cin, inputLine);
+//      Example of inputLine: "DO-FA-------SOL-LA-RE----";
+        // Spliting message.
+        if (inputLine != ":q")
+        {
+            notesSplit = split.split(inputLine, '-');
+            // Encoding.
+            messageEncoder.initEncoding(notesSplit);
+            messageVectorInt = messageEncoder.getMessageVectorInt();
+            // Sending data to CAN BUS.
+            dataSender.setMessageVectorInt(messageVectorInt);
+            dataSender.sendMessage();
+        }
+    }
+    std::cout << "Sending ending message CAN BUS.  Ending program..." << std::endl;
+    dataSender.endingProgram();
+
+    return 0;
 }

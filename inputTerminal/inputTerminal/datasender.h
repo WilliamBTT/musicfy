@@ -12,6 +12,7 @@
 #include <sys/ioctl.h>
 #include <linux/can.h>
 #include <linux/can/raw.h>
+#include <iostream>
 
 class DataSender
 {
@@ -33,6 +34,47 @@ public:
      */
     void setMessageVectorInt(std::vector<int> messageVectorInt);
 
+    /**
+     * @brief sendMessage. Initializing data sending.
+     * @return "-1" if failed. "0" if it works.
+     */
+    int sendMessage();
+
+    /**
+     * @brief configureCanBus. Configure can bus parameters.
+     * @return "0" if it worked, "-1" if it failed.
+     */
+    int configureCanBus();
+
+    /**
+     * @brief configureDataSending. Creating the socket CAN BUS configuration.
+     * @return "-1" if failed. "0" if it worked.
+     */
+    int configureDataSending();
+
+    /**
+     * @brief bindingSocketCan. Socket CAN BUS need a bind with address specification.
+     * @return "0" if it worked. "-2" if it failed.
+     */
+    int bindingSocketCan();
+
+    /**
+     * @brief fillDataFrame. Fill "_frame" attribute that contains data to send to CAN BUS.
+     */
+    void fillDataFrame();
+
+    /**
+     * @brief writeCanBus. Write message in CAN BUS.
+     * @return size of message that has been written (_nbytes attribute).
+     */
+    int writeCanBus();
+
+    /**
+     * @brief endingProgram. It sends a message with all bits to '1' and a special Identifier (999).
+     * It means that the user press ":q" and the program is ended.
+     */
+    void endingProgram();
+
 private:
     /**
      * @brief _messageVectorHex, Vector with data message in integer values.
@@ -43,7 +85,7 @@ private:
     /**
      * @brief _conectionResult, result of the connection to CAN BUS.
      */
-    int _conectionResult;
+    int _connectionInformation;
 
     /**
      * @brief _nbytes. Size of message that has been written.
@@ -69,6 +111,7 @@ private:
      * that is the virtual interface.
      */
     const char *_ifname;
+
 };
 
 #endif // DATASENDER_H
