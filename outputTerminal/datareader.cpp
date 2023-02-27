@@ -49,7 +49,7 @@ int DataReader::bindingSocketCan()
 
     // Linking socket to vcan.
     if (bind(_connectionInformation, (struct sockaddr *)&_addr, sizeof(_addr)) < 0) {
-        perror("Error al vincular el socket al bus CAN virtual");
+        perror("Error in socket bind");
         return 1;
     }
     return 0;

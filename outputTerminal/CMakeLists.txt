@@ -6,6 +6,8 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(outputTerminal
+    canbus.h
+    canbus.cpp
     datareader.h
     datareader.cpp
     main.cpp)
