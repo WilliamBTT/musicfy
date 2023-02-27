@@ -3,3 +3,4 @@ feature/MUSIC-001  -> Receiving multiples input message in the inputTerminal.
 feature/MUSIC-002  -> Splitting input string. Converting into a vector of pairs [notes, duration].
 feature/MUSIC-003  -> Converting vector of pairs into a bit message (for CAN BUS).
 feature/MUSIC-004  -> Creating DataSender (Class that sends Can Bus message).
+feature/MUSIC-004  -> Beginning of outputTerminal.
