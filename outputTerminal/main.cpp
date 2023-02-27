@@ -42,9 +42,9 @@ int main()
 
     // Variable for controlling execution flow.
     bool runningLoop = true; // global execution.
-    bool runningCanBus = false; // can bus execution.
+    bool runningCanBus = true; // can bus execution.
     bool runningCRUD = false; // CRUD execution.
-    std::thread canbusThread;
+    std::thread canbusThread(runCanBusReceiver, std::ref(runningCanBus));
     while (runningLoop)
     {
         // Setting time to sleep loop.
@@ -53,27 +53,12 @@ int main()
         // Protect global variable with Mutex.
         mutexMode.lock();
         if(mode ==0){
-            // Code to stop CRUD if it was active.
             // Can Bus listening.
             std::cout << "Can Bus listening" << std::endl;
-            if (!runningCanBus){
-                runningCanBus = true;
-                canbusThread = std::thread(runCanBusReceiver, std::ref(runningCanBus));
-            }
 
         }
         else if (mode ==1)
         {
-            // Code to stop CAN BUS if it was active.
-            if (runningCanBus){
-                runningCanBus = false;
-                if (canbusThread.joinable())
-                {
-//                    canbusThread.join();  // If canbus thread is active, wait until it stops.
-                    canbusThread.detach();
-                }
-            }
-
             // CRUD.
             std::cout << "doing some CRUD" << std::endl;
         }
