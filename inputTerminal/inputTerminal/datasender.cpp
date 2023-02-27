@@ -3,9 +3,10 @@
 #include <cstring>
 
 DataSender::DataSender()
-    : _ifname("vcan0")
+//    : _ifname("vcan0")
 {
     // Nothing to do.
+    _ifname = "vcan0";
 }
 
 DataSender::~DataSender()
@@ -23,54 +24,54 @@ int DataSender::sendMessage()
     // Filling data frame with data vector input.
     fillDataFrame();
     // Last step, writing in CAN BUS with data stored.
-    int size = writeCanBus();
+    writeCanBus();
     return 0;
 }
 
-int DataSender::configureCanBus()
-{
-    // Configuring connection.
-    if (configureDataSending() == -1)
-    {
-        return -1;
-    }
-    // Creating / binding socket.
-    if (bindingSocketCan() == -2)
-    {
-        return -2;
-    }
-    return 0;
-}
+//int DataSender::configureCanBus()
+//{
+//    // Configuring connection.
+//    if (configureDataSending() == -1)
+//    {
+//        return -1;
+//    }
+//    // Creating / binding socket.
+//    if (bindingSocketCan() == -2)
+//    {
+//        return -2;
+//    }
+//    return 0;
+//}
 
-int DataSender::configureDataSending()
-{
-    // Creating socket.
-    if ((_connectionInformation = socket(PF_CAN, SOCK_RAW, CAN_RAW)) == -1) {
-        perror("Error while opening socket");
-        return _connectionInformation;
-    }
-    return 0;
-}
+//int DataSender::configureDataSending()
+//{
+//    // Creating socket.
+//    if ((_connectionInformation = socket(PF_CAN, SOCK_RAW, CAN_RAW)) == -1) {
+//        perror("Error while opening socket");
+//        return _connectionInformation;
+//    }
+//    return 0;
+//}
 
-int DataSender::bindingSocketCan()
-{
-    strcpy(_ifr.ifr_name, _ifname);
-    ioctl(_connectionInformation, SIOCGIFINDEX, &_ifr);
+//int DataSender::bindingSocketCan()
+//{
+//    strcpy(_ifr.ifr_name, _ifname);
+//    ioctl(_connectionInformation, SIOCGIFINDEX, &_ifr);
 
-    // Setting address socket.
-    _addr.can_family  = AF_CAN;
-    _addr.can_ifindex = _ifr.ifr_ifindex;
+//    // Setting address socket.
+//    _addr.can_family  = AF_CAN;
+//    _addr.can_ifindex = _ifr.ifr_ifindex;
 
-    // Linking socket to vcan.
-    if (bind(_connectionInformation, (struct sockaddr *)&_addr, sizeof(_addr)) == -1) {
-        perror("Error in socket bind");
-        return -2;
-    }
-    else
-    {
-        return 0;
-    }
-}
+//    // Linking socket to vcan.
+//    if (bind(_connectionInformation, (struct sockaddr *)&_addr, sizeof(_addr)) == -1) {
+//        perror("Error in socket bind");
+//        return -2;
+//    }
+//    else
+//    {
+//        return 0;
+//    }
+//}
 
 void DataSender::fillDataFrame()
 {

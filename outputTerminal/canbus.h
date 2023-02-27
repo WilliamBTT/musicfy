@@ -17,10 +17,6 @@
 class CanBus
 {
 public:
-    /**
-     * @brief CanBus. CanBus constructor.
-     */
-    CanBus();
 
     /**
      * @brief configureCanBus. Configure can bus parameters.
@@ -41,13 +37,7 @@ public:
     int bindingSocketCan();
 
 
-private:
-    /**
-     * @brief _messageVectorHex, Vector with data message in integer values.
-     * These integer values will be used to fill messageData in this class.
-     */
-    std::vector<int> _messageVectorInt;
-
+protected:
     /**
      * @brief _conectionResult, result of the connection to CAN BUS.
      */

@@ -1,11 +1,5 @@
 #include "canbus.h"
 
-CanBus::CanBus()
-    : _ifname("vcan0")
-{
-    configureCanBus();
-}
-
 int CanBus::configureCanBus()
 {
     // Configuring connection.
@@ -36,6 +30,7 @@ int CanBus::bindingSocketCan()
 {
     strcpy(_ifr.ifr_name, _ifname);
     ioctl(_connectionInformation, SIOCGIFINDEX, &_ifr);
+    _frame.can_dlc = 8;
 
     // Setting address socket.
     _addr.can_family = AF_CAN;
