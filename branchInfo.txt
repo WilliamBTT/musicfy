@@ -6,3 +6,4 @@ feature/MUSIC-004  -> Creating DataSender (Class that sends Can Bus message).
 feature/MUSIC-005  -> Beginning of outputTerminal.
 feature/MUSIC-006  -> Creating thread for incoming can bus message. 
 feature/MUSIC-007  -> Creating father class of DataReader and DataSender.
+feature/MUSIC-008  -> Creating decoder of CanBus Message, in output Terminal.
