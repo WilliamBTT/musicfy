@@ -39,6 +39,22 @@ void DataReader::readingCanBusLoop(bool &runCanBus)
 {
     while(runCanBus)
     {
+        // Reading can bus.
         readCanBus();
+
+        // Filling can bus frame to get the string.
+        fillingFrameCanBus();
+
+        // Getting string (same message as in input terminal).
+        _messageDecoded = _messageDecoder.decode(_frameCanBus);
+        int a = 1;
+    }
+}
+
+void DataReader::fillingFrameCanBus()
+{
+    for (int i=0; i<=7; ++i)
+    {
+        _frameCanBus.push_back(_frame.data[i]);
     }
 }
