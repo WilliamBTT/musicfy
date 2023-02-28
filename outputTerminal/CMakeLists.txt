@@ -10,7 +10,9 @@ add_executable(outputTerminal
     canbus.cpp
     datareader.h
     datareader.cpp
-    main.cpp)
+    main.cpp
+    messagedecoder.h
+    messagedecoder.cpp)
 
 target_link_libraries(outputTerminal
     PRIVATE pthread

@@ -14,6 +14,7 @@
 #include <linux/can.h>
 #include <linux/can/raw.h>
 #include "canbus.h"
+#include "messagedecoder.h"
 
 class DataReader : public CanBus
 {
@@ -40,6 +41,30 @@ public:
      */
     void readingCanBusLoop(bool &runCanBus);
 
+    /**
+     * @brief fillingFrameCanBus, filling the can bus data frame copy.
+     */
+    void fillingFrameCanBus();
+
+    /**
+     * @brief checkingEndingMessage, check if input message has ID 0x333. In that case,
+     * the program must be stopped.
+     * @return bool if program must be stopped.
+     */
+    bool checkingEndingMessage();
+
+private:
+    /**
+     * @brief _messageDecoder, instance of MessageDecoder.
+     */
+    MessageDecoder _messageDecoder;
+
+    /**
+     * @brief _frameCanBus, copy of Can Bus data frame.
+     */
+    std::vector <unsigned char> _frameCanBus;
+
+    std::string _messageDecoded;
 };
 
 #endif // DATAREADER_H
