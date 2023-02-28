@@ -105,3 +105,7 @@ void MessageDecoder::gettingStringFromVector(std::vector<std::pair<std::string, 
     _messageReceived = finalMessage;
 }
 
+void MessageDecoder::setMelodiesVector(std::vector<std::pair<std::string, std::string> > melodiesVector)
+{
+    _melodiesVector = melodiesVector;
+}

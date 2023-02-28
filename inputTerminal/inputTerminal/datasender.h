@@ -1,5 +1,5 @@
-#ifndef DATASENDER_H
-#define DATASENDER_H
+#ifndef DATAWRITER_H
+#define DATAWRITER_H
 
 #include <vector>
 #include <stdio.h>
@@ -15,18 +15,18 @@
 #include <iostream>
 #include "../../outputTerminal/canbus.h"
 
-class DataSender : public CanBus
+class DataWriter : public CanBus
 {
 public:
     /**
-     * @brief DataSender constructor.
+     * @brief DataWriter constructor.
      */
-    DataSender();
+    DataWriter();
 
     /**
-     * @brief DataSender default constructor.
+     * @brief DataWriter default constructor.
      */
-    ~DataSender();
+    ~DataWriter();
 
     /**
      * @brief setMessageVectorInt. Setter of the message data input.
@@ -67,4 +67,4 @@ private:
 
 };
 
-#endif // DATASENDER_H
+#endif // DATAWRITER_H

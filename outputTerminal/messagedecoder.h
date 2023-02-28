@@ -47,6 +47,11 @@ public:
      */
     void gettingStringFromVector(std::vector<std::pair<std::string, int>> notesDurationVector);
 
+    /**
+     * @brief setMelodiesVector, setting _melodiesVector attribute.
+     * @param melodiesVector, value to set _melodiesVector attribute.
+     */
+    void setMelodiesVector(std::vector<std::pair<std::string, std::string>> melodiesVector);
 
 private:
     /**
@@ -63,6 +68,11 @@ private:
      * @brief _dataInputVector, input data. Is the can_frame.data.
      */
     std::vector<unsigned char> _dataInputVector;
+
+    /**
+     * @brief _melodiesVector, song's name and song's melody obtained from data base.
+     */
+    std::vector<std::pair<std::string, std::string>> _melodiesVector;
 };
 
 #endif // MESSAGEDECODER_H

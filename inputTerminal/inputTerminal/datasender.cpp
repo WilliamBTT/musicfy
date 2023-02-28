@@ -2,22 +2,22 @@
 #include <iostream>
 #include <cstring>
 
-DataSender::DataSender()
+DataWriter::DataWriter()
 {
     _ifname = "vcan0";
 }
 
-DataSender::~DataSender()
+DataWriter::~DataWriter()
 {
     // Nothing to do.
 }
 
-void DataSender::setMessageVectorInt(std::vector<int> messageVectorInt)
+void DataWriter::setMessageVectorInt(std::vector<int> messageVectorInt)
 {
     _messageVectorInt = messageVectorInt;
 }
 
-int DataSender::sendMessage()
+int DataWriter::sendMessage()
 {
     // Filling data frame with data vector input.
     fillDataFrame();
@@ -26,7 +26,7 @@ int DataSender::sendMessage()
     return 0;
 }
 
-void DataSender::fillDataFrame()
+void DataWriter::fillDataFrame()
 {
     _frame.can_id = 0x222;
     _frame.can_dlc = 8;
@@ -42,13 +42,13 @@ void DataSender::fillDataFrame()
 
 }
 
-int DataSender::writeCanBus()
+int DataWriter::writeCanBus()
 {
     _nbytes = write(_connectionInformation, &_frame, sizeof(struct can_frame));
     return _nbytes;
 }
 
-void DataSender::endingProgram()
+void DataWriter::endingProgram()
 {
     // Settinng special ID for ending program message.
     _frame.can_id = 0x333;
