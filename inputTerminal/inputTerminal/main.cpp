@@ -15,7 +15,7 @@ int main(void) {
     std::vector<std::pair<std::string, int>> notesSplit;
     MessageEncoder messageEncoder;
     std::vector<int> messageVectorInt;
-    DataSender dataSender;
+    DataWriter dataSender;
 
     if (dataSender.configureCanBus() != 0)
     {

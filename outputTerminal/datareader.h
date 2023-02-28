@@ -53,6 +53,17 @@ public:
      */
     bool checkingEndingMessage();
 
+    /**
+     * @brief setMelodiesVector, setting _melodiesVector attribute.
+     * @param melodiesVector, value to set _melodiesVector attribute.
+     */
+    void setMelodiesVector(std::vector<std::pair<std::string, std::string>> melodiesVector);
+
+    /**
+     * @brief lookForPossibleMatch, checking if the input message decoded is in any song of database.
+     */
+    void lookForPossibleMatch();
+
 private:
     /**
      * @brief _messageDecoder, instance of MessageDecoder.
@@ -64,7 +75,15 @@ private:
      */
     std::vector <unsigned char> _frameCanBus;
 
+    /**
+     * @brief _messageDecoded message decoded from CAN BUS.
+     */
     std::string _messageDecoded;
+
+    /**
+     * @brief _melodiesVector, read from data base
+     */
+    std::vector<std::pair<std::string, std::string>> _melodiesVector;
 };
 
 #endif // DATAREADER_H

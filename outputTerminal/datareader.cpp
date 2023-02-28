@@ -1,4 +1,5 @@
 #include "datareader.h"
+#include <string>
 
 DataReader::DataReader()
 {
@@ -42,9 +43,12 @@ void DataReader::readingCanBusLoop(bool &runCanBus)
         fillingFrameCanBus();
 
         // Getting string (same message as in input terminal).
+        _messageDecoder.setMelodiesVector(_melodiesVector);
         _messageDecoded = _messageDecoder.decode(_frameCanBus);
-        std::cout << _messageDecoded << std::endl;
-        int a = 1;
+        std::cout << "Message received is " << _messageDecoded << std::endl;
+        lookForPossibleMatch();
+
+
     }
 }
 
@@ -64,4 +68,30 @@ bool DataReader::checkingEndingMessage()
         return true;
     }
     return false;
+}
+
+void DataReader::setMelodiesVector(std::vector<std::pair<std::string, std::string> > melodiesVector)
+{
+    _melodiesVector = melodiesVector;
+}
+
+void DataReader::lookForPossibleMatch()
+{
+    bool match = false;
+    for (int i=0; i<_melodiesVector.size(); ++i)
+    {
+        size_t found = _melodiesVector[i].second.find(_messageDecoded);
+        if (found != std::string::npos) {
+            match = true;
+            size_t lenMelody = _messageDecoded.length();
+            size_t lenMelodyDataBase = _melodiesVector[i].second.length();
+            int percentageMatch = lenMelody * 100 / lenMelodyDataBase;
+            std::cout << "Match at song '" << _melodiesVector[i].first << "' with a percentage of "
+                      << percentageMatch << "%"<< std::endl;
+        }
+    }
+    if (!match)
+    {
+        std::cout << "No match for this melody" << std::endl;
+    }
 }
