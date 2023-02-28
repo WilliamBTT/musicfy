@@ -21,17 +21,6 @@ int DataReader::readCanBus()
         return 1;
     }
 
-    // Showing data about message received.
-    // Mostrar el mensaje CAN recibido
-    printf("ID de mensaje: 0x%X\n", _frame.can_id);
-    printf("Longitud de datos: %d\n", _frame.can_dlc);
-    printf("Datos: ");
-
-    for (int i = 0; i < _frame.can_dlc; i++) {
-        printf("%02X ", _frame.data[i]);
-    }
-
-    printf("\n");
     return 0;
 }
 
@@ -42,19 +31,37 @@ void DataReader::readingCanBusLoop(bool &runCanBus)
         // Reading can bus.
         readCanBus();
 
+        // Checking if input message is ending message.
+        if (checkingEndingMessage())
+        {
+            runCanBus = false;
+            break;
+        }
+
         // Filling can bus frame to get the string.
         fillingFrameCanBus();
 
         // Getting string (same message as in input terminal).
         _messageDecoded = _messageDecoder.decode(_frameCanBus);
+        std::cout << _messageDecoded << std::endl;
         int a = 1;
     }
 }
 
 void DataReader::fillingFrameCanBus()
 {
+    _frameCanBus.clear();
     for (int i=0; i<=7; ++i)
     {
         _frameCanBus.push_back(_frame.data[i]);
     }
+}
+
+bool DataReader::checkingEndingMessage()
+{
+    if (_frame.can_id ==  0x333)
+    {
+        return true;
+    }
+    return false;
 }

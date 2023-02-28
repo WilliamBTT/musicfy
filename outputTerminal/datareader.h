@@ -46,6 +46,13 @@ public:
      */
     void fillingFrameCanBus();
 
+    /**
+     * @brief checkingEndingMessage, check if input message has ID 0x333. In that case,
+     * the program must be stopped.
+     * @return bool if program must be stopped.
+     */
+    bool checkingEndingMessage();
+
 private:
     /**
      * @brief _messageDecoder, instance of MessageDecoder.

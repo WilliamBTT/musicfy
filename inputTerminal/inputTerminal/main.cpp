@@ -8,8 +8,6 @@
 #include <iostream>
 #include <vector>
 
-//using namespace std;
-
 int main(void) {
     int line=3, t;
     std::string inputLine = "";
@@ -30,7 +28,6 @@ int main(void) {
         std::cout << "Input message: (':q' for quit): " << std::endl;
         // Getting input message.
         getline(std::cin, inputLine);
-//      Example of inputLine: "DO-FA-------SOL-LA-RE----";
         // Spliting message.
         if (inputLine != ":q")
         {
